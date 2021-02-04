@@ -10,7 +10,6 @@ function searchWeather(city) {
     const query = city;
     const apiKey = '1a301874a116ded8ea06640d46bfd1f4';
     const unit = 'metric';
-
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&q=${query}&units=${unit}`;
     fetch(apiUrl)
         .then(res => res.json())
@@ -18,8 +17,13 @@ function searchWeather(city) {
             document.getElementById('tempData').innerText = data.main.temp;
             document.getElementById('lead').innerText = data.weather[0].main;
             const weatherIcon = data.weather[0].icon;
-            const imageUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+            const imageUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
             document.getElementById('imageUrl').src = imageUrl;
-        })
-}
+            document.getElementById('wind-speed').innerText = data.wind.speed;
+            document.getElementById('humidity').innerText = data.main.humidity;
+            document.getElementById('feels').innerText = data.main.feels_like;
+            document.getElementById('max-temp').innerText = data.main.temp_max;
+            document.getElementById('min-temp').innerText = data.main.temp_min;
+        });
+};
 searchWeather(city);
